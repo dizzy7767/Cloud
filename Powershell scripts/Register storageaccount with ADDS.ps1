@@ -43,3 +43,15 @@ Update-AzStorageAccountAuthForAES256 -ResourceGroupName $ResourceGroupName -Stor
 
 #You can run the Debug-AzStorageAccountAuth cmdlet to conduct a set of basic checks on your AD configuration with the logged on AD user. This cmdlet is supported on AzFilesHybrid v0.1.2+ version. For more details on the checks performed in this cmdlet, see Azure Files Windows troubleshooting guide.
 Debug-AzStorageAccountAuth -StorageAccountName $StorageAccountName -ResourceGroupName $ResourceGroupName -Verbose
+
+
+# Get the target storage account
+$storageaccount = Get-AzStorageAccount `
+        -ResourceGroupName "<your-resource-group-name-here>" `
+        -Name "<your-storage-account-name-here>"
+
+# List the directory service of the selected service account
+$storageAccount.AzureFilesIdentityBasedAuth.DirectoryServiceOptions
+
+# List the directory domain information if the storage account has enabled AD DS authentication for file shares
+$storageAccount.AzureFilesIdentityBasedAuth.ActiveDirectoryProperties
